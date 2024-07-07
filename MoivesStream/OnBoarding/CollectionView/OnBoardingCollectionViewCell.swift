@@ -15,7 +15,7 @@ class OnBoardingCollectionViewCell: UICollectionViewCell {
     }
     
     func setCellData(color: UIColor) {
-        self.mainView.backgroundColor = color
+//        self.mainView.backgroundColor = color
     }
 
 }

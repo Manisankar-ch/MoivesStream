@@ -9,7 +9,7 @@ import UIKit
 
 class OnBoardingViewController: UIViewController {
 @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet weak var pageControl: UIPageControl!
+@IBOutlet weak var pageControl: UIPageControl!
 @IBOutlet weak var collectionView: UICollectionView!
 
     var colors: [UIColor] = [.red,.green,.gray, .black]
@@ -33,14 +33,19 @@ class OnBoardingViewController: UIViewController {
                
     }
     
+    @IBAction func actionOnLogin(_ sender: UIButton) {
+        let controller = storyboard?.instantiateViewController(identifier: "NVC") as! UINavigationController
+         controller.modalPresentationStyle = .fullScreen
+         controller.modalTransitionStyle = .flipHorizontal
+         present(controller, animated: true, completion: nil)
+    }
+    
     @IBAction func actionOnNextButton(_ sender: UIButton) {
         if currentPage == colors.count - 1,
            let controller = storyboard?.instantiateViewController(identifier: "NVC") as? UINavigationController {
             controller.modalPresentationStyle = .fullScreen
             controller.modalTransitionStyle = .flipHorizontal
-            
             present(controller, animated: true, completion: nil)
-            
         } else {
             currentPage += 1
             let indexPath = IndexPath(item: currentPage, section: 0)
@@ -55,13 +60,7 @@ extension OnBoardingViewController: UICollectionViewDelegate, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        
-   
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OnBoardingCollectionViewCell", for: indexPath) as! OnBoardingCollectionViewCell
-        
-//        cell.backgroundColor = colors[indexPath.row]
         cell.setCellData(color: colors[indexPath.row])
         return cell
     }
